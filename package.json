@@ -30,7 +30,7 @@
     "gen:types": "wrangler types --env-file .env.example",
     "deploy:config": "node scripts/cloudflare-deploy-config.mjs",
     "db:generate": "drizzle-kit generate",
-    "db:migrate:local": "wrangler d1 migrations apply sink --local",
+    "db:migrate:local": "wrangler d1 migrations apply sink-xinshoutw --local",
     "db:migrate:remote": "pnpm deploy:config && wrangler d1 migrations apply DB --remote --config wrangler.deploy.jsonc",
     "deploy": "pnpm deploy:pages",
     "deploy:pages": "pnpm db:migrate:remote && wrangler pages deploy dist",

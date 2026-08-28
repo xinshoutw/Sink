@@ -31,7 +31,7 @@
   "analytics_engine_datasets": [
     {
       "binding": "ANALYTICS",
-      "dataset": "sink" // Override with DEPLOY_ANALYTICS_DATASET (default: sink). Keep in sync with NUXT_DATASET at runtime.
+      "dataset": "sink-xinshoutw" // Override with DEPLOY_ANALYTICS_DATASET (default: sink). Keep in sync with NUXT_DATASET at runtime.
     }
   ],
   "kv_namespaces": [
@@ -44,7 +44,7 @@
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "sink", // Override with DEPLOY_D1_DATABASE_NAME (default: sink)
+      "database_name": "sink-xinshoutw", // Override with DEPLOY_D1_DATABASE_NAME (default: sink)
       "database_id": "ef964055-65bf-4b78-b109-ac9c9290ae62", // Override with DEPLOY_D1_DATABASE_ID (required for CLI deploy)
       "migrations_dir": "drizzle"
     }
@@ -54,8 +54,8 @@
       "binding": "R2",
       // preview_bucket_name: DEPLOY_R2_PREVIEW_BUCKET_NAME (falls back to DEPLOY_R2_BUCKET_NAME)
       // omit DEPLOY_R2_BUCKET_NAME to drop R2 from generated deploy config
-      "preview_bucket_name": "sink",
-      "bucket_name": "sink" // Override with DEPLOY_R2_BUCKET_NAME
+      "preview_bucket_name": "sink-xinshoutw",
+      "bucket_name": "sink-xinshoutw" // Override with DEPLOY_R2_BUCKET_NAME
     }
   ],
   "triggers": {
