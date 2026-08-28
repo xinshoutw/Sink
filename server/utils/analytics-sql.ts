@@ -19,6 +19,13 @@ type AnalyticsDatabase = Record<string, AnalyticsRow>
 // Keep Analytics Engine identifiers to its conservative bare-identifier subset.
 // eslint-disable-next-line regexp/prefer-w, regexp/use-ignore-case
 const identifierPattern = /^[A-Za-z_][A-Za-z0-9_]*$/
+// Dataset names may contain hyphens, which no bare identifier allows. Analytics
+// Engine SQL accepts a double-quoted dataset, so the FROM clause is always
+// quoted while columns and aliases stay on the bare subset above.
+// eslint-disable-next-line regexp/prefer-w, regexp/use-ignore-case
+const datasetPattern = /^[A-Za-z_][A-Za-z0-9_-]*$/
+// eslint-disable-next-line regexp/prefer-w, regexp/use-ignore-case
+const quotedDatasetPattern = /^"[A-Za-z_][A-Za-z0-9_-]*"$/
 
 class AnalyticsQueryCompiler extends MysqlQueryCompiler {
   protected override getLeftIdentifierWrapper(): string {
@@ -30,7 +37,7 @@ class AnalyticsQueryCompiler extends MysqlQueryCompiler {
   }
 
   protected override sanitizeIdentifier(identifier: string): string {
-    if (!identifierPattern.test(identifier))
+    if (!identifierPattern.test(identifier) && !quotedDatasetPattern.test(identifier))
       throw new Error(`Invalid Analytics identifier: ${identifier}`)
 
     return identifier
@@ -47,10 +54,10 @@ const coldDb = new Kysely<AnalyticsDatabase>({
 })
 
 export function createAnalyticsQuery(dataset: string) {
-  if (!identifierPattern.test(dataset))
+  if (!datasetPattern.test(dataset))
     throw new Error(`Invalid Analytics dataset: ${dataset}`)
 
-  return coldDb.selectFrom(dataset)
+  return coldDb.selectFrom(`"${dataset}"`)
 }
 
 export function compileAnalyticsQuery(query: Compilable): string {

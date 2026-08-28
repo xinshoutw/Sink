@@ -28,11 +28,11 @@ vi.mock('../../server/utils/access-log', () => ({
 const baseQuery: Query = { limit: 500 }
 
 describe('analytics SQL compiler', () => {
-  it('compiles a query builder with bare identifiers and result aliases', () => {
+  it('compiles a query builder with a quoted dataset and bare result aliases', () => {
     const query = createAnalyticsQuery('sink')
       .select(sql<number>`SUM(_sample_interval)`.as('visits'))
 
-    expect(compileAnalyticsQuery(query)).toBe('select SUM(_sample_interval) as visits from sink')
+    expect(compileAnalyticsQuery(query)).toBe('select SUM(_sample_interval) as visits from "sink"')
   })
 
   it('compiles representative Analytics Engine SQL without table aliases', () => {
@@ -44,7 +44,7 @@ describe('analytics SQL compiler', () => {
       .limit(sql.lit(10))
     const compiled = compileAnalyticsQuery(query)
 
-    expect(compiled).toBe('select * from sink where index1 in (\'0\') order by timestamp desc limit 10')
+    expect(compiled).toBe('select * from "sink" where index1 in (\'0\') order by timestamp desc limit 10')
     expect(compiled).not.toContain('`')
     expect(compiled).not.toContain('as analytics')
     expect(compiled).not.toContain('analytics.')
@@ -71,7 +71,6 @@ describe('analytics SQL compiler', () => {
 
   it.each([
     'sink.events',
-    'sink-events',
     'sink as analytics',
     'sink;drop',
     '`sink`',
@@ -92,11 +91,17 @@ describe('analytics SQL compiler', () => {
     expect(() => compileAnalyticsQuery(query)).toThrow('Invalid Analytics identifier: invalid-alias')
   })
 
+  it('compiles a hyphenated dataset as a quoted identifier', () => {
+    const query = createAnalyticsQuery('sink-xinshoutw').selectAll()
+
+    expect(compileAnalyticsQuery(query)).toBe('select * from "sink-xinshoutw"')
+  })
+
   it('compiles valid bare column identifiers', () => {
     const query = createAnalyticsQuery('sink').select(sql.ref('blob1').as('dynamic_column'))
 
     expect(compileAnalyticsQuery(query))
-      .toBe('select blob1 as dynamic_column from sink')
+      .toBe('select blob1 as dynamic_column from "sink"')
   })
 })
 
