@@ -29,7 +29,9 @@ export default defineNuxtConfig({
     homeURL: '',
     cfAccountId: '',
     cfApiToken: '',
-    dataset: 'sink',
+    // Defaults to the build-time DEPLOY_ANALYTICS_DATASET so the dataset the
+    // dashboard reads cannot drift from the one the ANALYTICS binding writes.
+    dataset: process.env.DEPLOY_ANALYTICS_DATASET || 'sink',
     aiModel: '@cf/qwen/qwen3-30b-a3b-fp8',
     aiPrompt: `You are a URL shortening assistant, please shorten the URL provided by the user into a SLUG. The SLUG information should be derived from the URL and page content (if provided). Do not make any assumptions beyond the given information. A SLUG is human-readable and should not exceed three words and can be validated using regular expressions {slugRegex} . Only the best one is returned, the format must be JSON reference {"slug": "example-slug"}`,
     aiOgPrompt: `You are an OpenGraph metadata assistant. Please summarize the page content provided by the user into a perfect title and description for an OpenGraph preview. Do not make any assumptions beyond the given information. Only the best one is returned, the format must be JSON reference {"title": "Example Title", "description": "Example description that summarizes the page accurately."}`,

@@ -48,7 +48,7 @@ description: 通过 Git 集成和仪表盘管理的绑定将 Sink 部署到 Clou
 | `DEPLOY_KV_NAMESPACE_ID`          | 必需     | KV 命名空间 ID（在 KV 详情页）                                            |
 | `DEPLOY_KV_PREVIEW_NAMESPACE_ID`  | 可选     | 预览 KV 命名空间 ID；默认等于 `DEPLOY_KV_NAMESPACE_ID`                    |
 | `DEPLOY_D1_DATABASE_NAME`         | 可选     | D1 数据库名称；默认 `sink`                                                |
-| `DEPLOY_ANALYTICS_DATASET`        | 可选     | Analytics Engine 数据集；默认 `sink`（请与 `NUXT_DATASET` 保持一致）       |
+| `DEPLOY_ANALYTICS_DATASET`        | 可选     | Analytics Engine 数据集；默认 `sink`，并成为 `NUXT_DATASET` 的默认值       |
 
 还需为 Production 环境配置 Pages Build / Wrangler 鉴权变量。Pages 不会自动提供以下变量：
 

@@ -48,7 +48,7 @@ Under **Settings → Variables and Secrets**, add the build deployment configura
 | `DEPLOY_KV_NAMESPACE_ID`         | Yes       | KV namespace ID (from the KV detail page)                                      |
 | `DEPLOY_KV_PREVIEW_NAMESPACE_ID` | No        | Preview KV namespace ID; defaults to `DEPLOY_KV_NAMESPACE_ID`                  |
 | `DEPLOY_D1_DATABASE_NAME`        | No        | D1 database name; defaults to `sink`                                            |
-| `DEPLOY_ANALYTICS_DATASET`       | No        | Analytics Engine dataset; defaults to `sink` (keep aligned with `NUXT_DATASET`) |
+| `DEPLOY_ANALYTICS_DATASET`       | No        | Analytics Engine dataset; defaults to `sink`, and becomes the default `NUXT_DATASET` |
 
 Also configure Pages Build / Wrangler authentication for the Production environment. Pages does not provide these variables automatically:
 

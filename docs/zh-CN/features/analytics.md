@@ -15,7 +15,7 @@ description: 启用访问分析、查看图表和日志、了解近实时视图�
    - **Workers：** 通常由部署配置生成（数据集默认 `sink`）
    - **Pages：** **Settings → Bindings → Add → Analytics Engine**
    - 变量名：`ANALYTICS`
-   - 数据集：默认 `sink`。若设置了 `NUXT_DATASET`，这里必须相同
+   - 数据集：默认 `sink`，或 `DEPLOY_ANALYTICS_DATASET` 设置的值
 
 2. **账户 ID** — 把 `NUXT_CF_ACCOUNT_ID` 设为承载本应用的 Cloudflare 账户 ID  
    （仪表盘侧边栏账户名，或登录后 URL 里可见）

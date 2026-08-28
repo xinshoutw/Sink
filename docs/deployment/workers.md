@@ -36,10 +36,11 @@ Add these **build variables** (do **not** put production IDs into tracked `wrang
 | `DEPLOY_D1_DATABASE_ID`          | Your D1 database ID (from the D1 detail page)                                              |
 | `DEPLOY_KV_NAMESPACE_ID`         | Your KV namespace ID (from the KV detail page) → `kv_namespaces[].id`                      |
 | `DEPLOY_KV_PREVIEW_NAMESPACE_ID` | Optional Wrangler preview KV → `preview_id` (defaults to `DEPLOY_KV_NAMESPACE_ID`)         |
+| `DEPLOY_WORKER_NAME`             | Worker name to deploy as; omit to keep the `name` in `wrangler.jsonc`                      |
 | `DEPLOY_R2_BUCKET_NAME`          | Your R2 bucket name (only if you use R2; omit to skip R2) → `bucket_name`                  |
 | `DEPLOY_R2_PREVIEW_BUCKET_NAME`  | Optional Wrangler preview R2 → `preview_bucket_name` (defaults to `DEPLOY_R2_BUCKET_NAME`) |
 | `DEPLOY_D1_DATABASE_NAME`        | Optional; default `sink`                                                                   |
-| `DEPLOY_ANALYTICS_DATASET`       | Optional; default `sink` (keep in sync with `NUXT_DATASET` if you change it)               |
+| `DEPLOY_ANALYTICS_DATASET`       | Optional; default `sink`. Also becomes the default `NUXT_DATASET`, so the two cannot drift |
 
 `pnpm deploy:worker` generates gitignored `wrangler.deploy.jsonc` from these values, updates the D1 schema, then deploys. When you connect the repo, Cloudflare creates a deploy token — no extra credential to paste.
 

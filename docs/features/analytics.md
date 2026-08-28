@@ -15,7 +15,7 @@ You need all three:
    - **Workers:** usually created by deploy settings (dataset default `sink`)
    - **Pages:** **Settings → Bindings → Add → Analytics Engine**
    - Variable name: `ANALYTICS`
-   - Dataset: `sink` by default. If you set `NUXT_DATASET`, use the same name here
+   - Dataset: `sink` by default, or whatever `DEPLOY_ANALYTICS_DATASET` is set to
 
 2. **Account ID** — set `NUXT_CF_ACCOUNT_ID` to the Cloudflare account that hosts this app  
    (Dashboard sidebar → account name, or the URL after you log in)

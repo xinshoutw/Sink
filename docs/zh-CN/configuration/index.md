@@ -84,6 +84,7 @@ Workers 要在 Builds 和运行时填相同值。Pages 只填一次，然后重�
 | 变量                             | 放哪里                  | 何时生效                                                                        |
 | -------------------------------- | ----------------------- | ------------------------------------------------------------------------------- |
 | `NUXT_API_CORS`                  | Builds 或 Pages         | 严格等于 `true` 时，允许其他网站的浏览器调用 `/api/**`（CORS）。仍需要登录      |
+| `DEPLOY_WORKER_NAME`             | 仅 Workers Builds       | 部署时使用的 Worker 名称；不填则沿用 `wrangler.jsonc` 里的 `name`               |
 | `DEPLOY_R2_BUCKET_NAME`          | 仅 Workers Builds       | 填已有 R2 桶名以挂上 R2（`bucket_name`）。Pages：在 Bindings 里添加             |
 | `DEPLOY_KV_PREVIEW_NAMESPACE_ID` | Workers Builds 或 Pages | 可选 Wrangler `preview_id`；默认等于 `DEPLOY_KV_NAMESPACE_ID`                   |
 | `DEPLOY_R2_PREVIEW_BUCKET_NAME`  | 仅 Workers Builds       | 可选 Wrangler `preview_bucket_name`；启用 R2 时默认等于 `DEPLOY_R2_BUCKET_NAME` |
@@ -110,7 +111,7 @@ Workers 要在 Builds 和运行时填相同值。Pages 只填一次，然后重�
 | `NUXT_REDIRECT_WITH_QUERY`    | `false`                      | `true` 时把访客查询参数接到目标 URL                                                      |
 | `NUXT_REDIRECT_NO_STORE`      | `false`                      | `true` 时要求浏览器不要缓存这次跳转                                                      |
 | `NUXT_CASE_SENSITIVE`         | `false`                      | `true` 时自定义短链码区分大小写（`Docs` ≠ `docs`）                                       |
-| `NUXT_DATASET`                | `sink`                       | 访问分析数据集名；必须与 `ANALYTICS` 绑定一致                                            |
+| `NUXT_DATASET`                | `DEPLOY_ANALYTICS_DATASET`   | 仅当需要读取与 `ANALYTICS` 绑定写入方不同的数据集时才设置                                |
 | `NUXT_LIST_QUERY_LIMIT`       | `500`                        | 分析列表最大行数                                                                         |
 | `NUXT_DISABLE_BOT_ACCESS_LOG` | `false`                      | `true` 时从分析和 Webhook 排除机器人                                                     |
 | `NUXT_DISABLE_AUTO_BACKUP`    | `false`                      | `true` 时关闭计划 R2 备份                                                                |
@@ -118,6 +119,6 @@ Workers 要在 Builds 和运行时填相同值。Pages 只填一次，然后重�
 | `NUXT_AI_PROMPT`              | 内置                         | 自定义短链提示词必须保留 `{slugRegex}`                                                   |
 | `NUXT_AI_OG_PROMPT`           | 内置                         | 自定义社交预览提示词                                                                     |
 | `DEPLOY_D1_DATABASE_NAME`     | `sink`                       | 覆盖生成部署配置中的 `d1_databases[].database_name`                                      |
-| `DEPLOY_ANALYTICS_DATASET`    | `sink`                       | 覆盖生成部署配置中的 `analytics_engine_datasets[].dataset`；请与 `NUXT_DATASET` 保持一致 |
+| `DEPLOY_ANALYTICS_DATASET`    | `sink`                       | 覆盖生成部署配置中的 `analytics_engine_datasets[].dataset`，并成为 `NUXT_DATASET` 默认值 |
 
 详见[访问分析](/zh-CN/features/analytics)和 [API](/zh-CN/api/)。

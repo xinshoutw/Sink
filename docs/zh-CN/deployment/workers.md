@@ -36,10 +36,11 @@ description: 通过 Git 集成将 Sink 部署到 Cloudflare Workers。
 | `DEPLOY_D1_DATABASE_ID`          | D1 数据库 ID（在 D1 详情页）                                                      |
 | `DEPLOY_KV_NAMESPACE_ID`         | KV 命名空间 ID（在 KV 详情页）→ `kv_namespaces[].id`                              |
 | `DEPLOY_KV_PREVIEW_NAMESPACE_ID` | 可选 Wrangler 预览 KV → `preview_id`（默认等于 `DEPLOY_KV_NAMESPACE_ID`）         |
+| `DEPLOY_WORKER_NAME`             | 部署时使用的 Worker 名称；不填则沿用 `wrangler.jsonc` 里的 `name`                 |
 | `DEPLOY_R2_BUCKET_NAME`          | R2 存储桶名称（仅在使用 R2 时；不填则生成配置里不含 R2）→ `bucket_name`           |
 | `DEPLOY_R2_PREVIEW_BUCKET_NAME`  | 可选 Wrangler 预览 R2 → `preview_bucket_name`（默认等于 `DEPLOY_R2_BUCKET_NAME`） |
 | `DEPLOY_D1_DATABASE_NAME`        | 可选；默认 `sink`                                                                 |
-| `DEPLOY_ANALYTICS_DATASET`       | 可选；默认 `sink`（若改了，请与 `NUXT_DATASET` 保持一致）                         |
+| `DEPLOY_ANALYTICS_DATASET`       | 可选；默认 `sink`。同时成为 `NUXT_DATASET` 的默认值，两者不会漂移                 |
 
 `pnpm deploy:worker` 会根据这些值生成被 gitignore 的 `wrangler.deploy.jsonc`，更新 D1 结构后部署。连接仓库时 Cloudflare 会生成部署令牌 — 不用再单独粘贴部署密钥。
 

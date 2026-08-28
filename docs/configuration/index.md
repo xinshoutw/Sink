@@ -84,6 +84,7 @@ On Workers, set the same value in Builds and runtime. On Pages, set once, then r
 | Variable                         | Where                   | When it turns on                                                                                     |
 | -------------------------------- | ----------------------- | ---------------------------------------------------------------------------------------------------- |
 | `NUXT_API_CORS`                  | Builds or Pages         | Exactly `true` allows browser apps on other sites to call `/api/**` (CORS). Login is still required  |
+| `DEPLOY_WORKER_NAME`             | Workers Builds only     | Worker name to deploy as; unset keeps the `name` in `wrangler.jsonc`                                 |
 | `DEPLOY_R2_BUCKET_NAME`          | Workers Builds only     | Set to an existing R2 bucket name to attach R2 (`bucket_name`). Pages: add R2 under Bindings instead |
 | `DEPLOY_KV_PREVIEW_NAMESPACE_ID` | Workers Builds or Pages | Optional Wrangler `preview_id`; defaults to `DEPLOY_KV_NAMESPACE_ID`                                 |
 | `DEPLOY_R2_PREVIEW_BUCKET_NAME`  | Workers Builds only     | Optional Wrangler `preview_bucket_name`; defaults to `DEPLOY_R2_BUCKET_NAME` when R2 is enabled      |
@@ -110,7 +111,7 @@ Safe browsing example: Cloudflare Family DNS `https://family.cloudflare-dns.com/
 | `NUXT_REDIRECT_WITH_QUERY`    | `false`                      | `true` appends visitor query params to the target URL                                                        |
 | `NUXT_REDIRECT_NO_STORE`      | `false`                      | `true` asks browsers not to cache the redirect                                                               |
 | `NUXT_CASE_SENSITIVE`         | `false`                      | `true` keeps custom short-code case (`Docs` ≠ `docs`)                                                        |
-| `NUXT_DATASET`                | `sink`                       | Analytics dataset name; must match the `ANALYTICS` binding                                                   |
+| `NUXT_DATASET`                | `DEPLOY_ANALYTICS_DATASET`   | Only set this to read a dataset other than the one the `ANALYTICS` binding writes to                         |
 | `NUXT_LIST_QUERY_LIMIT`       | `500`                        | Max rows in analytics lists                                                                                  |
 | `NUXT_DISABLE_BOT_ACCESS_LOG` | `false`                      | `true` drops detected bots from analytics and webhooks                                                       |
 | `NUXT_DISABLE_AUTO_BACKUP`    | `false`                      | `true` turns off scheduled R2 backups                                                                        |
@@ -118,6 +119,6 @@ Safe browsing example: Cloudflare Family DNS `https://family.cloudflare-dns.com/
 | `NUXT_AI_PROMPT`              | built-in                     | Custom slug prompt must keep `{slugRegex}`                                                                   |
 | `NUXT_AI_OG_PROMPT`           | built-in                     | Custom social-preview prompt                                                                                 |
 | `DEPLOY_D1_DATABASE_NAME`     | `sink`                       | Overrides `d1_databases[].database_name` in generated deploy config                                          |
-| `DEPLOY_ANALYTICS_DATASET`    | `sink`                       | Overrides `analytics_engine_datasets[].dataset` in generated deploy config; keep aligned with `NUXT_DATASET` |
+| `DEPLOY_ANALYTICS_DATASET`    | `sink`                       | Overrides `analytics_engine_datasets[].dataset` and becomes the default `NUXT_DATASET`, so both stay aligned |
 
 See [Analytics](/features/analytics) and [API](/api/).
